@@ -105,7 +105,7 @@ export async function getGlobalSettings() {
     let settings = await prisma.globalSetting.findFirst()
     if (!settings) {
         settings = await prisma.globalSetting.create({
-            data: { id: '1' }
+            data: { id: '1', currency: 'INR' }
         })
     }
     return settings

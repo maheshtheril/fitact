@@ -10,6 +10,8 @@ interface Plan {
     id: string
     name: string
     price: number
+    referralBonus: number
+    levelCommissions: any
     status: boolean
     createdAt: Date
 }
@@ -17,6 +19,7 @@ interface Plan {
 interface Settings {
     matrixHeight: number
     matrixWidth: number
+    currency: string
 }
 
 export default function PlansClient({ plans, settings }: { plans: Plan[], settings: Settings }) {
@@ -69,7 +72,9 @@ export default function PlansClient({ plans, settings }: { plans: Plan[], settin
                         {plans.map((plan) => (
                             <tr key={plan.id} className="hover:bg-gray-50 transition-colors">
                                 <td className="px-6 py-4 text-sm text-gray-700">{plan.name}</td>
-                                <td className="px-6 py-4 text-sm font-semibold text-gray-900">${plan.price.toFixed(2)}</td>
+                                <td className="px-6 py-4 text-sm font-semibold text-gray-900">
+                                    {settings.currency === 'INR' ? '₹' : settings.currency}{plan.price.toFixed(2)}
+                                </td>
                                 <td className="px-6 py-4">
                                     <span className={`px-3 py-1 rounded-full text-xs font-medium border ${plan.status ? 'bg-green-50 text-green-600 border-green-200' : 'bg-red-50 text-red-600 border-red-200'
                                         }`}>

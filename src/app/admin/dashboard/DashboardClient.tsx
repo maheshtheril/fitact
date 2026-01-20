@@ -37,17 +37,17 @@ export default function DashboardClient({ data }: { data: DashboardStats }) {
     ]
 
     const depositStats = [
-        { label: "Total Deposited", value: `$${data.totalDeposited}`, icon: WalletCard, color: "text-green-600", bg: "bg-green-50" },
+        { label: "Total Deposited", value: `₹${data.totalDeposited}`, icon: WalletCard, color: "text-green-600", bg: "bg-green-50" },
         { label: "Pending Deposits", value: data.pendingDeposits, icon: RefreshCw, color: "text-orange-400", bg: "bg-orange-50" },
         { label: "Rejected Deposits", value: data.rejectedDeposits, icon: BanCircle, color: "text-red-500", bg: "bg-red-50" },
-        { label: "Deposited Charge", value: `$${data.depositedCharge}`, icon: PercentCircle, color: "text-indigo-500", bg: "bg-indigo-50" },
+        { label: "Deposited Charge", value: `₹${data.depositedCharge}`, icon: PercentCircle, color: "text-indigo-500", bg: "bg-indigo-50" },
     ]
 
     const withdrawalStats = [
-        { label: "Total Withdrawn", value: `$${data.totalWithdrawn}`, icon: WalletCard, color: "text-green-600", bg: "bg-green-50" },
+        { label: "Total Withdrawn", value: `₹${data.totalWithdrawn}`, icon: WalletCard, color: "text-green-600", bg: "bg-green-50" },
         { label: "Pending Withdrawals", value: data.pendingWithdrawals, icon: RefreshCw, color: "text-orange-400", bg: "bg-orange-50" },
         { label: "Rejected Withdrawals", value: data.rejectedWithdrawals, icon: BanCircle, color: "text-red-500", bg: "bg-red-50" },
-        { label: "Withdrawal Charge", value: `$${data.withdrawalCharge}`, icon: PercentCircle, color: "text-indigo-500", bg: "bg-indigo-50" },
+        { label: "Withdrawal Charge", value: `₹${data.withdrawalCharge}`, icon: PercentCircle, color: "text-indigo-500", bg: "bg-indigo-50" },
     ]
 
     return (
@@ -145,7 +145,7 @@ export default function DashboardClient({ data }: { data: DashboardStats }) {
                 <div className="bg-blue-100 p-6 rounded-xl flex items-center justify-between">
                     <div>
                         <p className="text-blue-600 font-medium">Total Commissions</p>
-                        <h3 className="text-3xl font-bold text-blue-900 mt-1">${data.totalCommissions}</h3>
+                        <h3 className="text-3xl font-bold text-blue-900 mt-1">₹{data.totalCommissions}</h3>
                     </div>
                     <div className="text-blue-400">
                         <Lock className="w-8 h-8" />

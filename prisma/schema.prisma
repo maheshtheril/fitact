@@ -83,6 +83,6 @@ model GlobalSetting {
   id            String   @id @default("1")
   matrixHeight  Int      @default(4)
   matrixWidth   Int      @default(3)
-  currency      String   @default("$")
+  currency      String   @default("INR")
   updatedAt     DateTime @updatedAt
 }

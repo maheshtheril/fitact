@@ -80,7 +80,7 @@ export default function PlanCreateClient({ matrixHeight }: Props) {
                                     className="w-full px-4 py-3 border border-gray-200 rounded-l-lg focus:outline-none focus:ring-2 focus:ring-[#5e50ee] focus:border-transparent"
                                     required
                                 />
-                                <span className="flex items-center px-4 bg-gray-100 border border-l-0 border-gray-200 rounded-r-lg text-gray-500 text-sm font-medium">USD</span>
+                                <span className="flex items-center px-4 bg-gray-100 border border-l-0 border-gray-200 rounded-r-lg text-gray-500 text-sm font-medium">INR</span>
                             </div>
                         </div>
                         <div>
@@ -94,7 +94,7 @@ export default function PlanCreateClient({ matrixHeight }: Props) {
                                     className="w-full px-4 py-3 border border-gray-200 rounded-l-lg focus:outline-none focus:ring-2 focus:ring-[#5e50ee] focus:border-transparent"
                                     required
                                 />
-                                <span className="flex items-center px-4 bg-gray-100 border border-l-0 border-gray-200 rounded-r-lg text-gray-500 text-sm font-medium">USD</span>
+                                <span className="flex items-center px-4 bg-gray-100 border border-l-0 border-gray-200 rounded-r-lg text-gray-500 text-sm font-medium">INR</span>
                             </div>
                         </div>
                     </div>
