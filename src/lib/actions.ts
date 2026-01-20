@@ -62,16 +62,16 @@ export async function getDashboardStats() {
         activeUsers,
         emailUnverified,
         mobileUnverified,
-        totalDeposited: totalDeposited._sum.amount || 0,
+        totalDeposited: totalDeposited._sum.amount ? totalDeposited._sum.amount.toNumber() : 0,
         pendingDeposits,
         rejectedDeposits,
-        depositedCharge: depositedCharge._sum.charge || 0,
-        totalWithdrawn: totalWithdrawn._sum.amount || 0,
+        depositedCharge: depositedCharge._sum.charge ? depositedCharge._sum.charge.toNumber() : 0,
+        totalWithdrawn: totalWithdrawn._sum.amount ? totalWithdrawn._sum.amount.toNumber() : 0,
         pendingWithdrawals,
         rejectedWithdrawals,
-        withdrawalCharge: withdrawalCharge._sum.charge || 0,
+        withdrawalCharge: withdrawalCharge._sum.charge ? withdrawalCharge._sum.charge.toNumber() : 0,
         totalPlans,
         totalPins,
-        totalCommissions: totalCommissions._sum.amount || 0
+        totalCommissions: totalCommissions._sum.amount ? totalCommissions._sum.amount.toNumber() : 0
     }
 }

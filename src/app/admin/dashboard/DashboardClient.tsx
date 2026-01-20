@@ -1,6 +1,6 @@
 "use client"
 
-import { Users, UserCheck, Mail, Smartphone, RefreshCw, CreditCard, Lock } from "lucide-react"
+import { Users, UserCheck, Mail, Smartphone, RefreshCw, CreditCard, Lock, Key } from "lucide-react"
 import { motion } from "framer-motion"
 
 // Define props interface
