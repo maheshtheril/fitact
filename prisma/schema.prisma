@@ -1,0 +1,78 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id               String    @id @default(cuid())
+  username         String    @unique
+  email            String    @unique
+  password         String // Added password field for admin login
+  status           Boolean   @default(true) // true = active
+  emailVerified    Boolean   @default(false)
+  mobileVerified   Boolean   @default(false)
+  balance          Decimal   @default(0) @db.Decimal(18, 8)
+  referralCode     String?   @unique
+  referredBy       String?
+  createdAt        DateTime  @default(now())
+  updatedAt        DateTime  @updatedAt
+  isAdmin          Boolean   @default(false)
+
+  deposits         Deposit[]
+  withdrawals      Withdrawal[]
+  commissions      Commission[]
+  pins             Pin[]
+}
+
+model Plan {
+  id          String   @id @default(cuid())
+  name        String
+  price       Decimal  @db.Decimal(18, 8)
+  status      Boolean  @default(true)
+  createdAt   DateTime @default(now())
+}
+
+model Deposit {
+  id          String   @id @default(cuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id])
+  amount      Decimal  @db.Decimal(18, 8)
+  charge      Decimal  @db.Decimal(18, 8)
+  status      String   @default("pending") // pending, approved, rejected
+  createdAt   DateTime @default(now())
+}
+
+model Withdrawal {
+  id          String   @id @default(cuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id])
+  amount      Decimal  @db.Decimal(18, 8)
+  charge      Decimal  @db.Decimal(18, 8)
+  status      String   @default("pending") // pending, approved, rejected
+  createdAt   DateTime @default(now())
+}
+
+model Pin {
+  id          String   @id @default(cuid())
+  code        String   @unique
+  userId      String?
+  user        User?    @relation(fields: [userId], references: [id])
+  isUsed      Boolean  @default(false)
+  createdAt   DateTime @default(now())
+}
+
+model Commission {
+  id          String   @id @default(cuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id])
+  amount      Decimal  @db.Decimal(18, 8)
+  type        String   // referral, level, etc.
+  createdAt   DateTime @default(now())
+}

@@ -1,0 +1,144 @@
+"use client"
+
+import { Users, UserCheck, Mail, Smartphone, RefreshCw, Key, Lock, CreditCard } from "lucide-react"
+import { motion } from "framer-motion"
+
+const stats = [
+    { label: "Total Users", value: "2637", icon: Users, color: "text-indigo-600", bg: "bg-indigo-50", border: "border-indigo-200" },
+    { label: "Active Users", value: "1557", icon: UserCheck, color: "text-green-600", bg: "bg-green-50", border: "border-green-200" },
+    { label: "Email Unverified", value: "1080", sub: "Users", icon: Mail, color: "text-red-500", bg: "bg-red-50", border: "border-red-200" },
+    { label: "Mobile Unverified", value: "0", sub: "Users", icon: Smartphone, color: "text-orange-500", bg: "bg-orange-50", border: "border-orange-200" },
+]
+
+const depositStats = [
+    { label: "Total Deposited", value: "$274,237.51", icon: WalletCard, color: "text-green-600", bg: "bg-green-50" },
+    { label: "Pending Deposits", value: "86", icon: RefreshCw, color: "text-orange-400", bg: "bg-orange-50" },
+    { label: "Rejected Deposits", value: "0", icon: BanCircle, color: "text-red-500", bg: "bg-red-50" },
+    { label: "Deposited Charge", value: "$1,552.63", icon: PercentCircle, color: "text-indigo-500", bg: "bg-indigo-50" },
+]
+
+const withdrawalStats = [
+    { label: "Total Withdrawn", value: "$115,918.50", icon: WalletCard, color: "text-green-600", bg: "bg-green-50" },
+    { label: "Pending Withdrawals", value: "82", icon: RefreshCw, color: "text-orange-400", bg: "bg-orange-50" },
+    { label: "Rejected Withdrawals", value: "1", icon: BanCircle, color: "text-red-500", bg: "bg-red-50" },
+    { label: "Withdrawal Charge", value: "$4,566.44", icon: PercentCircle, color: "text-indigo-500", bg: "bg-indigo-50" },
+]
+
+// Custom Icons placeholders
+function WalletCard({ className }: { className?: string }) {
+    return <div className={className}><CreditCard className="w-6 h-6" /></div>
+}
+function BanCircle({ className }: { className?: string }) {
+    return <div className={className}><Lock className="w-6 h-6" /></div>
+}
+function PercentCircle({ className }: { className?: string }) {
+    return <div className={className}><Users className="w-6 h-6" /></div>
+}
+
+export default function DashboardPage() {
+    return (
+        <div className="space-y-6">
+            <h1 className="text-2xl font-semibold text-gray-800">Dashboard</h1>
+
+            {/* Top Stats Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                {stats.map((stat, idx) => (
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: idx * 0.1 }}
+                        key={idx}
+                        className={`bg-white p-6 rounded-xl shadow-sm border ${stat.border} flex items-center justify-between card-hover cursor-pointer`}
+                    >
+                        <div>
+                            <p className="text-gray-500 text-sm font-medium">{stat.label}</p>
+                            {stat.sub && <p className="text-xs text-gray-400">{stat.sub}</p>}
+                            <h3 className="text-3xl font-bold mt-2 text-gray-800">{stat.value}</h3>
+                        </div>
+                        <div className={`p-4 rounded-lg ${stat.bg} ${stat.color}`}>
+                            <stat.icon className="w-8 h-8" />
+                        </div>
+                    </motion.div>
+                ))}
+            </div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                {/* Deposits Section */}
+                <div className="space-y-4">
+                    <h2 className="text-xl font-medium text-gray-700">Deposits</h2>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        {depositStats.map((item, idx) => (
+                            <motion.div
+                                key={idx}
+                                whileHover={{ scale: 1.02 }}
+                                className="bg-white p-4 rounded-lg shadow-sm flex items-center gap-4"
+                            >
+                                <div className={`p-3 rounded-full ${item.bg} ${item.color}`}>
+                                    <item.icon />
+                                </div>
+                                <div>
+                                    <h4 className="font-bold text-gray-800 text-lg">{item.value}</h4>
+                                    <p className="text-xs text-gray-500">{item.label}</p>
+                                </div>
+                            </motion.div>
+                        ))}
+                    </div>
+                </div>
+
+                {/* Withdrawals Section */}
+                <div className="space-y-4">
+                    <h2 className="text-xl font-medium text-gray-700">Withdrawals</h2>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        {withdrawalStats.map((item, idx) => (
+                            <motion.div
+                                key={idx}
+                                whileHover={{ scale: 1.02 }}
+                                className="bg-white p-4 rounded-lg shadow-sm flex items-center gap-4"
+                            >
+                                <div className={`p-3 rounded-full ${item.bg} ${item.color}`}>
+                                    <item.icon />
+                                </div>
+                                <div>
+                                    <h4 className="font-bold text-gray-800 text-lg">{item.value}</h4>
+                                    <p className="text-xs text-gray-500">{item.label}</p>
+                                </div>
+                            </motion.div>
+                        ))}
+                    </div>
+                </div>
+            </div>
+
+            {/* Bottom Row */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div className="bg-indigo-100 p-6 rounded-xl flex items-center justify-between">
+                    <div>
+                        <p className="text-indigo-600 font-medium">Total Plans</p>
+                        <h3 className="text-3xl font-bold text-indigo-900 mt-1">3</h3>
+                    </div>
+                    <div className="text-indigo-400">
+                        <Key className="w-8 h-8" />
+                    </div>
+                </div>
+                <div className="bg-orange-100 p-6 rounded-xl flex items-center justify-between">
+                    <div>
+                        <p className="text-orange-600 font-medium">All Pins</p>
+                        <h3 className="text-3xl font-bold text-orange-900 mt-1">266</h3>
+                    </div>
+                    <div className="text-orange-400">
+                        <Lock className="w-8 h-8" />
+                    </div>
+                </div>
+                <div className="bg-blue-100 p-6 rounded-xl flex items-center justify-between">
+                    <div>
+                        <p className="text-blue-600 font-medium">Total Commissions</p>
+                        <h3 className="text-3xl font-bold text-blue-900 mt-1">$578.00</h3>
+                    </div>
+                    <div className="text-blue-400">
+                        <Lock className="w-8 h-8" />
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    )
+}
