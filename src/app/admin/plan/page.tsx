@@ -1,3 +1,4 @@
+// Force redeploy for route verification
 import { getPlans, getGlobalSettings } from "@/lib/actions"
 import PlansClient from "./PlansClient"
 
