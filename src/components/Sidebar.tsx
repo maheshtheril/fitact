@@ -49,7 +49,7 @@ const sidebarItems: MenuItem[] = [
             { label: "Send Notification", href: "/admin/users/send-notification", icon: Send },
         ]
     },
-    { href: "/admin/plans", label: "Plans", icon: Layers },
+    { href: "/admin/plan", label: "Plans", icon: Layers },
     { href: "/admin/pins", label: "Manage Pins", icon: Key }, // Simplified for now
     { href: "/admin/deposits", label: "Deposits", icon: Wallet, badge: "!" },
     { href: "/admin/withdrawals", label: "Withdrawals", icon: ArrowRightLeft, badge: "!" },

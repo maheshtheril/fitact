@@ -1,4 +1,6 @@
+"use server"
 import { PrismaClient } from '@prisma/client'
+import { revalidatePath } from 'next/cache'
 
 const prisma = new PrismaClient()
 
@@ -74,4 +76,66 @@ export async function getDashboardStats() {
         totalPins,
         totalCommissions: totalCommissions._sum.amount ? totalCommissions._sum.amount.toNumber() : 0
     }
+}
+
+export async function getPlans() {
+    const plans = await prisma.plan.findMany({
+        orderBy: { createdAt: 'desc' }
+    })
+    return plans.map(p => ({
+        ...p,
+        price: p.price.toNumber()
+    }))
+}
+
+export async function getGlobalSettings() {
+    let settings = await prisma.globalSetting.findFirst()
+    if (!settings) {
+        settings = await prisma.globalSetting.create({
+            data: { id: '1' }
+        })
+    }
+    return settings
+}
+
+export async function updateMatrixSettings(height: number, width: number) {
+    await prisma.globalSetting.update({
+        where: { id: '1' },
+        data: {
+            matrixHeight: height,
+            matrixWidth: width
+        }
+    })
+    revalidatePath('/admin/plan')
+}
+
+export async function addPlan(name: string, price: number) {
+    await prisma.plan.create({
+        data: {
+            name,
+            price: price
+        }
+    })
+    revalidatePath('/admin/plan')
+}
+
+export async function updatePlan(id: string, name: string, price: number) {
+    await prisma.plan.update({
+        where: { id },
+        data: {
+            name,
+            price: price
+        }
+    })
+    revalidatePath('/admin/plan')
+}
+
+export async function togglePlanStatus(id: string, currentStatus: boolean) {
+    await prisma.plan.update({
+        where: { id },
+        data: {
+            status: !currentStatus
+        }
+    })
+    revalidatePath('/admin/plan')
 }
