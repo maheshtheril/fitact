@@ -32,11 +32,13 @@ model User {
 }
 
 model Plan {
-  id          String   @id @default(cuid())
-  name        String
-  price       Decimal  @db.Decimal(18, 8)
-  status      Boolean  @default(true)
-  createdAt   DateTime @default(now())
+  id               String   @id @default(cuid())
+  name             String
+  price            Decimal  @db.Decimal(18, 8)
+  referralBonus    Decimal  @default(0) @db.Decimal(18, 8)
+  levelCommissions Json?    // Array of numbers for level percentages/amounts 
+  status           Boolean  @default(true)
+  createdAt        DateTime @default(now())
 }
 
 model Deposit {

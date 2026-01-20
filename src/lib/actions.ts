@@ -84,8 +84,21 @@ export async function getPlans() {
     })
     return plans.map(p => ({
         ...p,
-        price: p.price.toNumber()
+        price: p.price.toNumber(),
+        referralBonus: p.referralBonus ? p.referralBonus.toNumber() : 0,
     }))
+}
+
+export async function getPlan(id: string) {
+    const plan = await prisma.plan.findUnique({
+        where: { id }
+    })
+    if (!plan) return null
+    return {
+        ...plan,
+        price: plan.price.toNumber(),
+        referralBonus: plan.referralBonus ? plan.referralBonus.toNumber() : 0,
+    }
 }
 
 export async function getGlobalSettings() {
@@ -109,22 +122,36 @@ export async function updateMatrixSettings(height: number, width: number) {
     revalidatePath('/admin/plan')
 }
 
-export async function addPlan(name: string, price: number) {
+export async function createPlan(data: {
+    name: string,
+    price: number,
+    referralBonus: number,
+    levelCommissions: number[]
+}) {
     await prisma.plan.create({
         data: {
-            name,
-            price: price
+            name: data.name,
+            price: data.price,
+            referralBonus: data.referralBonus,
+            levelCommissions: data.levelCommissions
         }
     })
     revalidatePath('/admin/plan')
 }
 
-export async function updatePlan(id: string, name: string, price: number) {
+export async function updatePlan(id: string, data: {
+    name: string,
+    price: number,
+    referralBonus: number,
+    levelCommissions: number[]
+}) {
     await prisma.plan.update({
         where: { id },
         data: {
-            name,
-            price: price
+            name: data.name,
+            price: data.price,
+            referralBonus: data.referralBonus,
+            levelCommissions: data.levelCommissions
         }
     })
     revalidatePath('/admin/plan')
